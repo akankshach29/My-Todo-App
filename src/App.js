@@ -1,25 +1,28 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Todo from './Todo';
 
 class App extends Component {
+  state = {
+    todos: [
+      {todo: 'buy milk', id: 1},
+      {todo: 'dentist appointment', id: 2}
+    ]
+  }
+
+  deleteTodo = (id) => {
+    let delToddo = this.state.todos.filter(todo => 
+      {return todo.id !== id}
+    )
+
+    this.setState({
+      todos: delToddo
+    })
+  }
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <h1>Todo's</h1>
+        <Todo todos={this.state.todos} deleteTodo={this.deleteTodo} />
       </div>
     );
   }
